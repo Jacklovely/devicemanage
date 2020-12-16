@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}管理设备{% endblock %}
+{% block link %}<link href="{% static 'devMS/css/manDevices/manDevices.css' %}" rel="stylesheet">{% endblock %}
+{% block contend %}
+
+<div id="search_area">
+    {% include "search.html" %}
+    <div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+				    <th>id</th>
+					<th>icon</th>
+					<th>设备名</th>
+					<th>编号</th>
+					<th>签借人</th>
+					<th>操作</th>
+					<th>删除</th>
+					<th>修改</th>
+					<th style="color:red;">所属</th>
+					<th>借出时间</th>
+				</tr>
+			</thead>
+			<tbody>
+            {% for device in deviceobj %}
+                <tr did="{{ device.id }}">
+                    <td>{{forloop.counter}}</td>
+                {% if device.dev_imgs_set.all.0.path == Null %}
+                    <td></td>
+                {% else %}
+                    <td><img onclick="showDevInfo()" class="dev_icon" id="icon_{{ device.id }}" src="/media/{{device.dev_imgs_set.all.0.path}}"/></td>
+                {% endif %}
+                    <td>{{ device.device_name }}</td>
+                    <td>{{ device.theNum }}</td>
+                {% if device.borrower %}
+                    <td>
+                        <input type="text" class="form-control" style="width:130px;" value="{{ device.borrower }}" id="input_{{ device.id }}">
+                        <button type="button" class="btn btn-sm btn-warning" style="margin-top:5px;"  onclick="applyFor()" id="{{ device.id }}" dversion="{{ device.version }}">修改</button>
+                    </td>
+                    <td><button class="btn btn-sm btn-danger" onclick="confirmReturned()" id="return_{{ device.id }}">归还</button></td>
+                    <td><button type="button" class="btn btn-sm btn-danger" id="delete_{{ device.id }}" onclick="deleteDev()">删除</button></td>
+                    <td><button type="button" class="btn btn-sm btn-warning" id="modify_{{ device.id }}" onclick="modifyDevice()">修改</button></td>
+                {% else %}
+                    <td><input type="text" class="form-control" style="width:130px;" name="browsser" id="input_{{ device.id }}"></td>
+                    <td><button class="btn btn-sm btn-success" onclick="applyFor()" id="{{ device.id }}" dversion="{{ device.version }}">借出</button></td>
+                    <td><button type="button" class="btn btn-sm btn-danger"id="delete_{{ device.id }}" onclick="deleteDev()">删除</button></td>
+                    <td><button type="button" class="btn btn-sm btn-warning"  id="modify_{{ device.id }}" onclick="modifyDevice()">修改</button></td>
+                {% endif %}
+                    <td>{{ device.owner }}</td>
+                {% if device.borrow_time == Null %}
+                    <td></td>
+                {% else %}
+                    <td>{{ device.borrow_time }}</td>
+                {% endif %}
+                 </tr>
+            {% endfor %}
+
+			</tbody>
+		</table>
+	</div>
+</div>
+{% include "page.html" %}
+{% endblock %}
+
+{% block js %}
+ <script src="{% static 'devMS/js/manDevices/manDevices.js' %}"></script>
+ <script src="{% static 'devMS/js/exportExcel.js' %}"></script>
+{% endblock %}

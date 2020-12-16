@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}关于系统{% endblock %}
+{% block link %}<link href="{%static 'devMS/css/aboutPage/aboutPage.css'%}" rel="stylesheet"/>{% endblock %}
+{% block contend %}
+
+    <div style="width: 100%;height:100%;background-color:#EEEEFF">
+
+{#        <div style="width: 100%;height:200px;background-color:#EEEEFF"></div>#}
+        <div style="width: 100%;height:200px;background-color:#EEEEFF;text-align:center;">
+            <h3 style="margin-top:0px;margin-bottom:20px;">亲，喜欢就点个赞吧~</h3>
+            <img id="like-btn" src="/media/click_on.png"></img>
+        </div>
+        <div>
+            <h4 id="like" style="text-align:center;margin-top:30px;" hidden>O(∩_∩)O   Thanks you ~</h4>
+            <div style="text-align:center;padding-top:20px;" target="_blank"><label>本系统采用Django 2.2&Python3.7.2<a href=""></a></label>
+            </div>
+            <div style="text-align:center;padding-top:20px;"><label style="margin-top:0px;margin-bottom:20px;" >设备管理系统--Version1.2~</label>
+            </div>
+            <hr style="background-color:#333;text-align:center;padding-top:1px;" />
+            <div style="text-align:center;padding-top:20px;">
+                <label style="margin-top:0px;margin-bottom:20px;" >release note--Version1.1~</label>
+                <p style="text-align:left;margin-top:0px;margin-bottom:20px;" >1.添加了借用、修改系统版本提醒</p>
+            </div>
+             <div style="text-align:center;padding-top:20px;">
+                 <label style="margin-top:0px;margin-bottom:20px;" >release note--Version1.2~</label>
+                 <p style="text-align:left;margin-top:0px;margin-bottom:20px;" >1.设备增加采购报告
+                                    2.搜索框模糊搜索
+                                    3.增加一键导出设备到excel
+                                    4.增加日志 设备型号
+                                    5.修改bug，修改按钮提示系统版本为null
+                                    6.添加分页功能  
+                 </p>
+            </div>
+        </div>
+   </div>
+{% endblock %}

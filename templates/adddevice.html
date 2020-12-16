@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} 设备管理添加页{% endblock %}
+{% block link %}<link href="{%static 'devMS/css/addDevices/addDevices.css'%}" rel="stylesheet"/>{% endblock %}
+
+{% block contend %}
+    <div id="add_devices">
+        <form action="/mobiledevice/adddevice/" method="post" enctype="multipart/form-data">
+            <table>
+                {{ deviceform.as_table }}
+            </table>
+             <p style="margin-left:300px;">
+                 <input type="submit" value="添加" style="margin-left:10px;position:absolute;padding-top:5px;color: #2a6496">
+                 <input type="reset" value="取消" style="margin-left:200px;position:absolute;padding-top:5px;color: #2a6496" name="reset">
+             </p>
+        </form>
+
+    </div>
+
+{% endblock %}
+{% block js %}
+ <script src="{% static 'devMS/js/addDevices/addDevices.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} 设备管理查询列表{% endblock %}
+{% block link %}<link href="{% static 'devMS/css/showDev/showDevs.css' %}" rel="stylesheet">{% endblock %}
+{% block contend %}
+
+<div id="search_area">
+{% include "search.html" %}
+    <div>
+        <table class="table table-striped" id="alldeviceInfo">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>icon</th>
+                    <th>设备名</th>
+                    <th>型号</th>
+                    <th>编号</th>
+                    <th>签借人</th>
+                    <th>申请</th>
+                    <th style="color:red;">所属</th>
+                    <th>借出时间</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for device in deviceobj %}
+                <tr did="{{ device.id }}">
+                    <td>{{forloop.counter}}</td>
+                {% if device.dev_imgs_set.all.0.path == Null %}
+                    <td></td>
+                {% else %}
+                    <td><img onclick="showDevInfo()" class="dev_icon" id="icon_{{ device.id }}" src="/media/{{device.dev_imgs_set.all.0.path}}"/></td>
+                {% endif %}
+                    <td>{{ device.device_name }}</td>
+                    <td>{{ device.model}}</td>
+                    <td>{{ device.theNum }}</td>
+                {% if device.borrower %}
+                    <td>{{ device.borrower }}</td>
+                    <td></td>
+                {% else %}
+                    <td><input type="text" class="form-control" style="width:150px;" name="browsser" id="#input_{{ device.id }}"></td>
+                    <td><button class="btn btn-sm btn-success" dversion="{{ device.version }}" onclick="applyFor()" id={{ device.id }}>申 请</button></td>
+                {% endif %}
+                    <td>{{ device.owner }}</td>
+                {% if device.borrow_time == Null %}
+                    <td></td>
+                {% else %}
+                    <td>{{ device.borrow_time }}</td>
+                {% endif %}
+                 </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+{% include "page.html" %}
+{% endblock %}
+
+{% block js %}
+ <script src="{% static 'devMS/js/showDev/showDevs.js' %}"></script>
+ <script src="{% static 'devMS/js/exportExcel.js' %}"></script>
+{% endblock %}

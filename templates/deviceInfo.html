@@ -1,0 +1,67 @@
+{% extends "base.html"%}
+{% load static %}
+{% block title %}设备系统LOG{% endblock %}
+{% block contend %}
+    <link href="{% static "devMS/css/showDev/showDevInfoPage.css" %}" rel="stylesheet">
+    <button type="button" class="btn btn-sm btn-success btn-back" onclick="javascript:history.back(-1);">《返回</button>
+    <div id="show_dev_inifo_page_div">
+        <table class="table table-bordered">
+            <tr class="info_table">
+                <td>设备id: {{ device.id }}</td>
+                <td>设备名: {{ device.device_name }}</td>
+                <td>设备型号: {{ device.model }}</td>
+                <td>设备编号: {{ device.theNum }}</td>
+                <td>借出时间: {{ device.borrow_time }}</td>
+            </tr>
+            <tr class="info_table">
+                {% if device.status == '1' %}
+                    <td>状态: 未借出</td>
+                {% elif device.status == '2'%}
+                    <td>状态: 已借出</td>
+                {% endif %}
+                <td>借阅者: {{ device.borrower }}</td>
+                <td>所属:  {{ device.owner }}</td>
+                <td>系统版本: {{ device.version }}</td>
+                <td>添加时间: {{ device.add_time|date:"Y-m-d H:i:s" }}</td>
+            </tr>
+
+            <tr class="info_table">
+                {% if  device.plateform == '1' %}
+                    <td>平台: android</td>
+                {% elif device.plateform == '2' %}
+                    <td>平台: ios</td>
+                {% endif %}
+                <td>品牌: {{ device.brand }}</td>
+                <td colspan="3">备注: {{ device.comments }} </td>
+            </tr>
+            <tr class="info_table">
+                <td colspan="5">UUID: {{ device.UUID }}</td>
+            </tr>
+        </table>
+    </div>
+    <div style="width: 900px;margin-left: 140px">
+    <table class="table table-bordered">
+        <tr>
+            <td>
+                <strong>设备图片</strong>
+            </td>
+            <td>
+            <div class="responsive" style="text-align:center;height:500px;">
+            <img style="height:500px;" src="/media/{{device.dev_imgs_set.all.0.path}}">
+            </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>申请采购图片</strong>
+            </td>
+            <td>
+            <div class="responsive" style="text-align:center;height:500px;">
+            <img style="height:500px;" src="/media/{{device.dev_imgs_set.all.0.apply_path}}">
+            </div>
+            </td>
+        </tr>
+    </table>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}盘点设备{% endblock %}
+{% block link %}<link href="{% static 'devMS/css/checkDevices/checkDevices.css' %}" rel="stylesheet">{% endblock %}
+
+{% block contend %}
+<div id="search_area">
+    <div style="text-align: center;padding-top:10px;">
+	<button type="button" class="btn btn-sm btn-primary" style="margin-right: 20px;" id="no_checked" onclick="getNoCheckedDevs()">未盘点</button>
+	<button type="button" class="btn btn-sm btn-success" style="margin-right: 20px;" id="checkeded" onclick="getCheckedDevs()">已盘点</button>
+	<button type="button" class="btn btn-sm btn-info" style="margin-right: 20px;" id="all_devs" onclick="getAllDevs()">所有</button>
+	<button type="button" class="btn btn-sm btn-danger" style="margin-right: 20px;" id="initaillize" onclick="initaillizeDevsStatus()">重置所有</button>
+    </div>
+    <div style="margin-top: 20px;">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>icon</th>
+					<th>设备名</th>
+                    <th>设备型号</th>
+					<th>编号</th>
+					<th>签借人</th>
+					<th style="color:red;">所属</th>
+					<th>借出时间</th>
+					<th>确定</th>
+					<th>重置</th>
+				</tr>
+			</thead>
+			<tbody>
+            {% for device in deviceobj %}
+                <tr did="{{ device.id }}">
+                    <td>{{forloop.counter}}</td>
+                {% if device.dev_imgs_set.all.0.path == Null %}
+                    <td></td>
+                {% else %}
+                    <td><img onclick="showDevInfo()" class="dev_icon" id="icon_{{ device.id }}" src="/media/{{device.dev_imgs_set.all.0.path}}"/></td>
+                {% endif %}
+                    <td>{{ device.device_name }}</td>
+                    <td>{{ device.model }}</td>
+                    <td>{{ device.theNum }}</td>
+                {% if device.borrower %}
+                    <td>{{ device.borrower }}</td>
+                {% else %}
+                    <td></td>
+                {% endif %}
+                    <td>{{ device.owner }}</td>
+                {% if device.borrow_time == Null %}
+                    <td></td>
+                {% else %}
+                    <td>{{ device.borrow_time }}</td>
+                {% endif %}
+                {% if device.check_dev == '0'%}
+                    <td><button type="button" class="btn btn-sm btn-success" onclick="confirmIsAt()" id="confirm1_{{ device.id }}">确定</button></td>
+                    <td></td>
+                {% elif device.check_dev == '1' %}
+                    <td></td>
+                    <td><button type="button" class="btn btn-sm btn-danger" onclick="initaillizeTheDev()" id="confirm0_{{ device.id }}">重置</button></td>
+                {% endif %}
+                 </tr>
+            {% endfor %}
+
+			</tbody>
+		</table>
+	</div>
+
+</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+{% block js %}
+ <script src="{% static 'devMS/js/checkDevices/checkDevices.js' %}"></script>
+{% endblock %}

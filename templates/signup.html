@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+</head>
+<body style="background-color: #EEEEFF;">
+ <link href="{% static "/dist/css/signin.css" %}" rel="stylesheet">
+ <div class="container">
+     <div style=" max-width: 330px;padding: 15px;margin: 0 auto;font-size:16px">
+           <h1>欢迎注册！</h1>
+            <form action="/mobiledevice/signup/" method="post">
+                <table>
+                    <tr>
+                        <td>{{ signup_form.user_name.label}}</td>
+                        <td>{{ signup_form.user_name }}</td>
+                    </tr>
+                    <tr><td>{{ signup_form.user_name.error_messages }}</td></tr>
+                    <tr>
+                        <td>{{ signup_form.login_name.label}}</td>
+                        <td>{{ signup_form.login_name }}</td>
+
+                    </tr>
+                    <tr><td>{{ signup_form.login_name.error_messages }}</td></tr>
+                    <tr>
+                        <td>{{ signup_form.password.label }}</td>
+                        <td>{{ signup_form.password }}</td>
+                    </tr>
+                    <tr> <td>{{ signup_form.password.error_messages }}</td></tr>
+                    <tr>
+                        <td>{{ signup_form.repassword.label}}</td>
+                        <td>{{ signup_form.repassword }}</td>
+                    </tr>
+                    <tr><td>{{ signup_form.repassword.error_messages }}</td></tr>
+                    <tr>{{ error_message }}</tr>
+                </table>
+                <input type="submit" value="注册" class="button">
+           </form>
+     </div>
+    </div>
+ <script src="{% static '/dist/js/signup.js' %}"></script>
+</body>
+</html>

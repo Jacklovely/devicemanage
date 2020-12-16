@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} 设备管理修改页{% endblock %}
+{% block contend %}
+    <link href="{%static 'dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{%static 'devMS/css/index.css'%}" rel="stylesheet">
+    <link href="{%static 'devMS/css/manDevices/changeDevInfo.css'%}" rel="stylesheet"/>
+    <div id="add_devices">
+        <form action="/mobiledevice/manadevice/deviceid={{ deviceObj.id }}" method="post" enctype="multipart/form-data">
+            <table>
+               {{ deviceform.as_table }}
+            </table>
+{#            <p><img id="previewPic" style="margin-left:300px;width:250px;height: 300px" src="/media/{{ deviceObj.dev_imgs_set.all.0.path }}"></p>#}
+             <p><img id="previewApplyPic" style="margin-left:300px;width:250px;height: 300px" src="/media/{{ path }}"></p>
+            <p><img id="previewApplyPic" style="margin-left:300px;width:250px;height: 300px" src="/media/{{ deviceObj.dev_imgs_set.all.0.apply_path }}"></p>
+            <p><input name="deviceid" type="text" value="{{ deviceObj.id }}" style="display: none"></p>
+            <p style="margin-left:300px;"><input type="submit" value="修改" style="margin-left:10px;position:absolute;padding-top:5px;color: #2a6496">
+                 <input type="button" value="返回" style="margin-left:200px;position:absolute;padding-top:5px;color: #2a6496" id="cancleModifyDev" ></p>
+        </form>
+    </div>
+{% endblock %}
+{% block js %}
+ <script src="{% static 'devMS/js/modifyDevices/modifyDevices.js' %}"></script>
+{% endblock %}

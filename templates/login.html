@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页</title>
+    <link href="/static/dist/css/signin.css" rel="stylesheet" type="text/css">
+    <style>
+        .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  border-radius:15px;
+}
+    </style>
+</head>
+<body style="background-color: #EEEEFF;">
+
+    <div class="container">
+        <div style=" max-width: 330px;padding: 15px;margin: 0 auto;font-size:16px">
+           <h1 class="form-signin-heading">欢迎登录！</h1>
+           <form action="/mobiledevice/login/" method="post">
+                {% csrf_token %}
+               <table>
+                <tr><td>{{login_form.user_name.label}}</td>
+                    <td>{{ login_form.user_name }}</td>
+                </tr>
+                <tr><td>{{ login_form.user_name.error_messages }}</td></tr>
+                <tr><td>{{login_form.password.label}}</td>
+                   <td>{{ login_form.password }}</td>
+                </tr>
+                <tr><td>{{ login_form.password.error_messages }}</td></tr>
+                <tr>{{ error_message }}</tr>
+               </table>
+               <input type="submit" value="登录" class="button">
+               <input type="button" value="注册" class="button" onclick="signup()">
+           </form>
+        </div>
+    </div>
+ <script src="{% static '/dist/js/signup.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{% extends "base.html"%}
+{% load static %}
+{% block title %}设备系统LOG{% endblock %}
+{% block link %}<link href="{% static '/devMS/css/logMan/logMan.css'%}" rel="stylesheet">{% endblock %}
+
+{% block contend %}
+<div id="logPanel">
+   {% for log in logobj %}
+       <b><p style="margin:0px;color:#428BCA;display:inline;">{{ forloop.counter }}</p></b>
+       <b><p style="margin:0px;_color:#428BCA;display:inline;">{{ log.1 }}</p></b></br>
+   {% endfor %}
+</div>
+{% endblock %}

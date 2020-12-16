@@ -1,0 +1,9 @@
+.dev_icon{
+	height:70px;
+	cursor:pointer;
+}
+
+#checkDevices{
+    background-color:#428BCA;
+	color:white;
+}

@@ -1,0 +1,23 @@
+<nav aria-label="Page navigation" style="margin-top: 900px ">
+        <div class="pagination">
+            <ul class="pagination">
+            {% if deviceobj.has_previous %}
+                <li><a href="{{deviceobj.previous_page_number}}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span></a></li>
+            {% endif %}
+
+            {% for num in deviceobj.paginator.page_range%}
+                {%if pindex == deviceobj.number%}
+                    <li><a href="">{{ num }}</a></li>
+                {%else%}
+                    <li><a href="{{num}}">{{ num }}</a></li>
+                {%endif%}
+             {% endfor %}
+
+             {% if deviceobj.has_next %}
+                 <li><a href="{{deviceobj.next_page_number}}" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span></a></li>
+              {% endif %}
+            </ul>
+        </div>
+    </nav>
